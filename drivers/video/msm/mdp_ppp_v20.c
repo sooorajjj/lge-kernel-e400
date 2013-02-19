@@ -2227,6 +2227,7 @@ void mdp_set_scale(MDPIBUF *iBuf,
 					   && (mdp_curr_up_scale_xy !=
 					       MDP_BC_SCALE_UP)) {
 					mdp_load_bc_upscale_table();
+					mdp_load_bc_upscale_table();
 					mdp_curr_up_scale_xy = MDP_BC_SCALE_UP;
 				}
 			}
@@ -2255,6 +2256,8 @@ void mdp_set_scale(MDPIBUF *iBuf,
 						       MDP_BC_SCALE_POINT8_1)) {
 						mdp_load_bc_downscale_table_x_point8TO1
 						    ();
+						mdp_load_bc_downscale_table_x_point8TO1
+						    ();
 						mdp_curr_down_scale_x =
 						    MDP_BC_SCALE_POINT8_1;
 					}
@@ -2272,6 +2275,8 @@ void mdp_set_scale(MDPIBUF *iBuf,
 						   && (mdp_curr_down_scale_x !=
 						       MDP_BC_SCALE_POINT6_POINT8))
 					{
+						mdp_load_bc_downscale_table_x_point6TOpoint8
+						    ();
 						mdp_load_bc_downscale_table_x_point6TOpoint8
 						    ();
 						mdp_curr_down_scale_x =
@@ -2293,6 +2298,8 @@ void mdp_set_scale(MDPIBUF *iBuf,
 					{
 						mdp_load_bc_downscale_table_x_point4TOpoint6
 						    ();
+						mdp_load_bc_downscale_table_x_point4TOpoint6
+						    ();
 						mdp_curr_down_scale_x =
 						    MDP_BC_SCALE_POINT4_POINT6;
 					}
@@ -2308,6 +2315,8 @@ void mdp_set_scale(MDPIBUF *iBuf,
 						   && (mdp_curr_down_scale_x !=
 						       MDP_BC_SCALE_POINT2_POINT4))
 					{
+						mdp_load_bc_downscale_table_x_point2TOpoint4
+						    ();
 						mdp_load_bc_downscale_table_x_point2TOpoint4
 						    ();
 						mdp_curr_down_scale_x =
@@ -2332,6 +2341,8 @@ void mdp_set_scale(MDPIBUF *iBuf,
 						       MDP_BC_SCALE_POINT8_1)) {
 						mdp_load_bc_downscale_table_y_point8TO1
 						    ();
+						mdp_load_bc_downscale_table_y_point8TO1
+						    ();
 						mdp_curr_down_scale_y =
 						    MDP_BC_SCALE_POINT8_1;
 					}
@@ -2349,6 +2360,8 @@ void mdp_set_scale(MDPIBUF *iBuf,
 						   && (mdp_curr_down_scale_y !=
 						       MDP_BC_SCALE_POINT6_POINT8))
 					{
+						mdp_load_bc_downscale_table_y_point6TOpoint8
+						    ();
 						mdp_load_bc_downscale_table_y_point6TOpoint8
 						    ();
 						mdp_curr_down_scale_y =
@@ -2370,6 +2383,8 @@ void mdp_set_scale(MDPIBUF *iBuf,
 					{
 						mdp_load_bc_downscale_table_y_point4TOpoint6
 						    ();
+						mdp_load_bc_downscale_table_y_point4TOpoint6
+						    ();
 						mdp_curr_down_scale_y =
 						    MDP_BC_SCALE_POINT4_POINT6;
 					}
@@ -2385,6 +2400,8 @@ void mdp_set_scale(MDPIBUF *iBuf,
 						   && (mdp_curr_down_scale_y !=
 						       MDP_BC_SCALE_POINT2_POINT4))
 					{
+						mdp_load_bc_downscale_table_y_point2TOpoint4
+						    ();
 						mdp_load_bc_downscale_table_y_point2TOpoint4
 						    ();
 						mdp_curr_down_scale_y =
