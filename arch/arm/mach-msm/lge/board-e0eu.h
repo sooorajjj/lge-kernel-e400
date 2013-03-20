@@ -115,5 +115,10 @@ enum {
 #endif
 
 extern void snd_fm_vol_mute(void);
+
+#ifndef CONFIG_LGE_USB_GADGET_DRIVER
+#define CONFIG_LGE_USB_GADGET_DRIVER
+#endif
+
 #endif
 

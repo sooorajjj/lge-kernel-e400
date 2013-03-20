@@ -80,6 +80,12 @@ static const char longname[] = "Gadget Android";
 #define VENDOR_ID		0x18D1
 #define PRODUCT_ID		0x0001
 
+/* put necessary LUN quantity for board usb gadget mass storage */
+#ifndef BOARD_USB_MASS_STORAGE_NUM_LUNS
+#define BOARD_USB_MASS_STORAGE_NUM_LUNS 2
+#endif
+
+
 struct android_usb_function {
 	char *name;
 	void *config;
@@ -844,15 +850,21 @@ static int mass_storage_function_init(struct android_usb_function *f,
 {
 	struct mass_storage_function_config *config;
 	struct fsg_common *common;
+	char lun_name[5];
 	int err;
+	int i = 0;
 
 	config = kzalloc(sizeof(struct mass_storage_function_config),
 								GFP_KERNEL);
 	if (!config)
 		return -ENOMEM;
 
-	config->fsg.nluns = 1;
-	config->fsg.luns[0].removable = 1;
+	/* mass storage fix */
+
+	config->fsg.nluns = BOARD_USB_MASS_STORAGE_NUM_LUNS;
+
+	for (i=0; i < BOARD_USB_MASS_STORAGE_NUM_LUNS; i++)
+		config->fsg.luns[i].removable = 1;
 
 	common = fsg_common_init(NULL, cdev, &config->fsg);
 	if (IS_ERR(common)) {
@@ -860,14 +872,20 @@ static int mass_storage_function_init(struct android_usb_function *f,
 		return PTR_ERR(common);
 	}
 
-	err = sysfs_create_link(&f->dev->kobj,
-				&common->luns[0].dev.kobj,
-				"lun");
-	if (err) {
-		fsg_common_release(&common->ref);
-		kfree(config);
-		return err;
+	for (i=0; i < BOARD_USB_MASS_STORAGE_NUM_LUNS; i++) {
+
+	        sprintf(lun_name,"lun%d",i);
+
+		err = sysfs_create_link(&f->dev->kobj,
+				&common->luns[i].dev.kobj,
+				lun_name);
+		if (err) {
+			fsg_common_release(&common->ref);
+			kfree(config);
+			return err;
+		}
 	}
+
 
 	config->common = common;
 	f->config = config;
